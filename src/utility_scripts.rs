@@ -1,3 +1,4 @@
+
 pub fn is_prime(num: i64) -> bool {
     if num <= 1 {
         return false;
@@ -10,10 +11,10 @@ pub fn is_prime(num: i64) -> bool {
     return true;
 }
 
-pub fn sum_array(vector:Vec<i64>) -> i64 {
-    return vector.iter().sum();
-}
-
 pub fn multiply_array(vector:Vec<i64>) -> i64 {
     return vector.iter().product();
 }
+
+// pub fn sum_array(vector:Vec<i64>) -> i64 {
+//     return vector.iter().sum();
+// }

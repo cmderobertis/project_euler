@@ -2,10 +2,10 @@ use std::time::{Duration, Instant};
 mod utility_scripts;
 
 // configure current problem
-const CURRENT_PROBLEM: usize = 8;
+const CURRENT_PROBLEM: usize = 9;
 
 // all problems
-const PROBLEMS: [fn() -> i64; CURRENT_PROBLEM] = [pe1, pe2, pe3, pe4,pe5, pe6, pe7, pe8];
+const PROBLEMS: [fn() -> i64; CURRENT_PROBLEM] = [pe1, pe2, pe3, pe4, pe5, pe6, pe7, pe8, pe9];
 
 pub fn run_all() {
     let mut count: i64 = 0;
@@ -16,6 +16,8 @@ pub fn run_all() {
         run(problem);
     });
 }
+
+
 
 pub fn run(problem: &fn() -> i64) {
     let now: Instant = Instant::now();
@@ -234,19 +236,21 @@ fn pe8() -> i64 {
     return max_product;
 }
 
-// fn pe9() -> i64 {
-//     // for i in range(c, 500):
-//     for i in 0..501 {
+fn pe9() -> i64 {
+    let mut product: i64 = 0;
+    let mut remainder: i64;
+    let perimeter: i64= 1000;
+    
+    for i in 0..500 {
+        for j in 0..413 {
+            remainder = perimeter - i - j;
 
-//     }
-//     // print(f"i={i}")
-
-//     // for j in range(a, c):
-//     //     remainder = perimeter - i - j
-
-//     //     if pow(remainder,2) + pow(j,2) == pow(i,2):
-//     //        print(f"{remainder}^2 + {j}^2 == {i^2}")
-//     //        product = i * j * remainder
-
-//     // print(product)
-// }
+            if remainder.pow(2) + j.pow(2) == i.pow(2) {
+                //println!("{i}^2 == {j}^2 + {remainder}^2");
+                product = i * j * remainder;
+            }
+        }
+    }
+    
+    return product;
+}
