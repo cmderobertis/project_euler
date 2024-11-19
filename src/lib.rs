@@ -1,17 +1,17 @@
-use std::{
-    ptr::null,
-    time::{Duration, Instant},
-};
-
+use std::{iter::Product, time::{Duration, Instant}};
 use utility_scripts::is_prime;
 mod utility_scripts;
 
 // configure current problem
-pub const CURRENT_PROBLEM: usize = 10;
+pub const CURRENT_PROBLEM: usize = 11;
 
 // all problems
 const PROBLEMS: [fn() -> i64; CURRENT_PROBLEM] =
-    [pe1, pe2, pe3, pe4, pe5, pe6, pe7, pe8, pe9, pe10];
+    [pe1, pe2, pe3, pe4, pe5, pe6, pe7, pe8, pe9, pe10, pe11];
+
+pub fn run_current() {
+    run(&PROBLEMS[PROBLEMS.len() - 1]);
+}
 
 pub fn run_all() {
     let mut count: i64 = 0;
@@ -272,4 +272,16 @@ pub fn pe10() -> i64 {
     }
 
     return sum;
+}
+
+// What is the greatest product of four adjacent numbers in the same direction (up, down, left, right, or diagonally) in the 20x20 grid?
+pub fn pe11() -> i64 {
+    let product: i64;
+    let max_found_manually: i64 = 13956768;
+    let max_possible: i64 = 96059601;
+
+    //Assumption: the tetrad with the largest sum must also have the largest product
+
+    product = max_possible;
+    return product;
 }
