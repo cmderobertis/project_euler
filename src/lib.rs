@@ -1,4 +1,4 @@
-use std::{iter::Product, time::{Duration, Instant}};
+use std::time::{Duration, Instant};
 use utility_scripts::is_prime;
 mod utility_scripts;
 
@@ -276,12 +276,13 @@ pub fn pe10() -> i64 {
 
 // What is the greatest product of four adjacent numbers in the same direction (up, down, left, right, or diagonally) in the 20x20 grid?
 pub fn pe11() -> i64 {
-    let product: i64;
-    let max_found_manually: i64 = 13956768;
-    let max_possible: i64 = 96059601;
-
-    //Assumption: the tetrad with the largest sum must also have the largest product
+    let mut product: i64;
+    let max_found_manually: i64 = 13956768; //13 million
+    let max_possible: i64 = 96059601; //96 million
+    let mut smallest_allowable_num: i64 = 1;
+    //Hypothesis: the tetrad with the largest sum will also have the largest product
 
     product = max_possible;
+
     return product;
 }
