@@ -1,13 +1,13 @@
 use std::time::{Duration, Instant};
-use utility_scripts::is_prime;
+use utility_scripts::{factorize, is_prime, count_factors};
 mod utility_scripts;
 
 // configure current problem
-pub const CURRENT_PROBLEM: usize = 11;
+pub const CURRENT_PROBLEM: usize = 12;
 
 // all problems
 const PROBLEMS: [fn() -> i64; CURRENT_PROBLEM] =
-    [pe1, pe2, pe3, pe4, pe5, pe6, pe7, pe8, pe9, pe10, pe11];
+    [pe1, pe2, pe3, pe4, pe5, pe6, pe7, pe8, pe9, pe10, pe11, pe12];
 
 pub fn run_current() {
     run(&PROBLEMS[PROBLEMS.len() - 1]);
@@ -519,4 +519,55 @@ pub fn pe11() -> i64 {
     }
 
     return max_product;
+}
+
+// What is the value of the first triangle number to have over five hundred divisors?
+pub fn pe12() -> i64 {
+    let mut triangle_number: i64 = 0;
+    let mut i: i64 = 1;
+    let mut max_factor_count: i64 = 0;
+    let mut factor_count: i64;
+    let mut factor_count2: i64;
+    let mut factors: Vec<i64>;
+
+    loop {
+        triangle_number += i;
+        
+        if is_prime(triangle_number) {
+            i += 1;
+            continue;
+        }
+
+        //factors = factorize(triangle_number);
+        factor_count = count_factors(triangle_number);
+        //factor_count2 = factors.len() as i64;
+        
+        // if factor_count != factor_count2 {
+        //     println!("Error: contradicting returns from factor functions!");
+        //     println!("count_factors(): {factor_count}, factorize().len(): {factor_count2}");
+        //     break;
+        // }
+
+        if factor_count > max_factor_count {
+            max_factor_count = factor_count;
+        }
+        println!("{triangle_number} is the {i}th triangle number. Factor count [max: {max_factor_count}, current: {factor_count}]");
+        if factor_count > 500 {
+            break;
+        }
+
+        i += 1;
+    }
+
+    return triangle_number;
+}
+
+// Work out the first ten digits of the sum of the following one-hundred 50-digit numbers.
+pub fn pe13() -> i64 {
+    let first_ten: i64;
+    let nums: [[i64;50];100];
+
+    first_ten = 1;
+
+    return first_ten;
 }
