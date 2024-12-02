@@ -1,13 +1,17 @@
-use std::time::{Duration, Instant};
-use utility_scripts::{factorize, is_prime, count_factors};
+use std::{
+    iter::Map,
+    time::{Duration, Instant},
+};
+use utility_scripts::{count_factors, factorize, is_prime, sum_array};
 mod utility_scripts;
 
 // configure current problem
 pub const CURRENT_PROBLEM: usize = 12;
 
 // all problems
-const PROBLEMS: [fn() -> i64; CURRENT_PROBLEM] =
-    [pe1, pe2, pe3, pe4, pe5, pe6, pe7, pe8, pe9, pe10, pe11, pe12];
+const PROBLEMS: [fn() -> i64; CURRENT_PROBLEM] = [
+    pe1, pe2, pe3, pe4, pe5, pe6, pe7, pe8, pe9, pe10, pe11, pe12,
+];
 
 pub fn run_current() {
     run(&PROBLEMS[PROBLEMS.len() - 1]);
@@ -362,7 +366,6 @@ pub fn pe11() -> i64 {
     println!("{smallest_allowable_num}");
     for row in 0..20 {
         for column in 0..20 {
-            
             //NORTH
             if row >= 3 {
                 arr = [
@@ -409,10 +412,10 @@ pub fn pe11() -> i64 {
                     GRID[row][column + 2],
                     GRID[row][column + 3],
                 ];
-    
+
                 if check_arr(arr, smallest_allowable_num) {
                     product = utility_scripts::multiply_array(Vec::<i64>::from(arr));
-    
+
                     if product > max_product {
                         max_product = product;
                         smallest_allowable_num = max_product / 99 / 99 / 99 + 1;
@@ -428,17 +431,17 @@ pub fn pe11() -> i64 {
                     GRID[row + 2][column + 2],
                     GRID[row + 3][column + 3],
                 ];
-    
+
                 if check_arr(arr, smallest_allowable_num) {
                     product = utility_scripts::multiply_array(Vec::<i64>::from(arr));
-    
+
                     if product > max_product {
                         max_product = product;
                         smallest_allowable_num = max_product / 99 / 99 / 99 + 1;
                     }
                 }
             }
-            
+
             //SOUTH
             if row < 17 {
                 arr = [
@@ -476,7 +479,6 @@ pub fn pe11() -> i64 {
                     }
                 }
             }
-            
 
             //WEST
             if column >= 3 {
@@ -532,7 +534,7 @@ pub fn pe12() -> i64 {
 
     loop {
         triangle_number += i;
-        
+
         if is_prime(triangle_number) {
             i += 1;
             continue;
@@ -541,7 +543,7 @@ pub fn pe12() -> i64 {
         //factors = factorize(triangle_number);
         factor_count = count_factors(triangle_number);
         //factor_count2 = factors.len() as i64;
-        
+
         // if factor_count != factor_count2 {
         //     println!("Error: contradicting returns from factor functions!");
         //     println!("count_factors(): {factor_count}, factorize().len(): {factor_count2}");
@@ -565,9 +567,35 @@ pub fn pe12() -> i64 {
 // Work out the first ten digits of the sum of the following one-hundred 50-digit numbers.
 pub fn pe13() -> i64 {
     let first_ten: i64;
-    let nums: [[i64;50];100];
+    let nums: [[i64; 50]; 100];
 
     first_ten = 1;
 
     return first_ten;
+}
+
+// What is the sum of the digits of the number 2^1000?
+pub fn pe17() -> i64 {
+    let mut current_count: i64;
+    let mut total_count: i64 = 0;
+
+    let digit_map: [i64; 10] = [3, 3, 5, 4, 4, 3, 5, 5, 4, 3];
+    let tens_map: [i64; 10] = [0, 0, 6, 6, 5, 5, 5, 7, 6, 6];
+    let hundreds_map: [i64; 10] = [0,3, 3, 5, 4, 4, 3, 5, 5, 4];
+
+    for num in 1..1001 {
+        current_count = 0;
+
+        if num == 1000 {
+            total_count += 11;
+            continue;
+        } else if num > 100 {
+            current_count += hundreds_map.get(num / 100).expect("should be a number");
+            current_count += 10; // "hundred and"
+        }
+
+        total_count += current_count;
+    }
+
+    return total_count;
 }
