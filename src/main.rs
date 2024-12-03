@@ -1,4 +1,4 @@
-use lib::{self, pe16};
+use lib::{self};
 
 fn main() {
 
@@ -9,6 +9,6 @@ fn main() {
     //lib::run_current();
 
     //RUN SPECIFIC PROBLEM BY FUNCTION NAME
-    lib::run(&(pe16 as fn() -> i64));
+    lib::run(&(lib::pe15 as fn() -> i64));
 
 }

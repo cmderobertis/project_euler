@@ -746,38 +746,36 @@ pub fn pe14() -> i64 {
 
 // How many such routes are there through a 20x20 grid?
 pub fn pe15() -> i64 {
-    let memo: HashMap<[usize;2],i64> = HashMap::new();
+    let mut memo: HashMap<[i64;2],i64> = HashMap::new();
+    let grid_size: i64 = 21;
+    let mut coords: [i64;2];
+    let mut up_one: [i64;2];
+    let mut left_one: [i64;2];
+    let mut routes: i64 = 0;
 
-    fn count_routes(row: usize, column: usize, memo: HashMap<[usize; 2], i64>) -> i64 {
-        let mut memo: HashMap<[usize;2],i64> = memo.clone();
-        let coords: [usize;2] = [row,column];
-        let up_one: [usize;2] = [row - 1, column];
-        let left_one: [usize;2] = [row, column - 1];
-        println!("row: {row} | column: {column}");
-        let mut routes: i64 = 0;
-
-        if row == 0 {
-            return 1;
-        } else if column == 0 {
-            return  1;
-        } else {
-            if memo.contains_key(&up_one) {
+    for row in 0..grid_size {
+        for column in 0..grid_size {
+            routes = 0;
+            coords = [row,column];
+            up_one = [row - 1, column];
+            left_one = [row, column - 1];
+            println!("{coords:?}");
+            if row == 0 {
+                routes += 1;
+            } else if column == 0 {
+                routes += 1;
+            } else {
                 routes += memo.get(&up_one).expect("should be a number");
-            } else {
-                routes += count_routes(row - 1, column, memo.clone());
-            }
-            if memo.contains_key(&left_one) {
                 routes += memo.get(&left_one).expect("should be a number");
-            } else {
-                routes += count_routes(row, column - 1, memo.clone());
             }
 
             memo.insert(coords, routes);
-            return routes;
         }
     }
 
-    return count_routes(20, 20, memo);
+    
+
+    return routes;
 }
 
 // What is the sum of the digits of the number 2^1000?
