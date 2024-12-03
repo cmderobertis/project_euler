@@ -3,11 +3,11 @@ use utility_scripts::{is_prime, count_factors};
 mod utility_scripts;
 
 // configure current problem
-pub const CURRENT_PROBLEM: usize = 15;
+pub const PROBLEM_COUNT: usize = 16;
 
 // all problems
-const PROBLEMS: [fn() -> i64; CURRENT_PROBLEM] =
-    [pe1, pe2, pe3, pe4, pe5, pe6, pe7, pe8, pe9, pe10, pe11, pe12, pe13, pe14, pe15];
+const PROBLEMS: [fn() -> i64; PROBLEM_COUNT] =
+    [pe1, pe2, pe3, pe4, pe5, pe6, pe7, pe8, pe9, pe10, pe11, pe12, pe13, pe14, pe15, pe17];
 
 pub fn run_current() {
     run(&PROBLEMS[PROBLEMS.len() - 1]);
@@ -525,8 +525,6 @@ pub fn pe12() -> i64 {
     let mut i: i64 = 1;
     let mut max_factor_count: i64 = 0;
     let mut factor_count: i64;
-    let mut factor_count2: i64;
-    let mut factors: Vec<i64>;
 
     loop {
         triangle_number += i;
@@ -536,15 +534,7 @@ pub fn pe12() -> i64 {
             continue;
         }
 
-        //factors = factorize(triangle_number);
         factor_count = count_factors(triangle_number);
-        //factor_count2 = factors.len() as i64;
-
-        // if factor_count != factor_count2 {
-        //     println!("Error: contradicting returns from factor functions!");
-        //     println!("count_factors(): {factor_count}, factorize().len(): {factor_count2}");
-        //     break;
-        // }
 
         if factor_count > max_factor_count {
             max_factor_count = factor_count;
@@ -788,4 +778,67 @@ pub fn pe15() -> i64 {
     }
 
     return count_routes(20, 20, memo);
+}
+
+// What is the sum of the digits of the number 2^1000?
+//pub fn pe16() -> i64 {
+//}
+
+//If all the numbers from 1 to 1000 inclusive were written out in words, how many letters would be used?
+pub fn pe17() -> i64 {
+    let mut current_count: i64;
+    let mut total_count: i64 = 0;
+
+    let hundreds_map: [&str; 10] = ["", "onehundredand", "twohundredand", "threehundredand", "fourhundredand", "fivehundredand", "sixhundredand", "sevenhundredand", "eighthundredand", "ninehundredand"];
+    let tens_map: [&str; 10] = ["", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"];
+    let digit_map: [&str; 10] = ["", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"];
+    let teens_map: [&str; 10] = ["ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"];
+
+    let mut hundreds: usize;
+    let mut tens: usize;
+    let mut ones: usize;
+    let mut hundreds_string: &str;
+    let mut tens_string: &str;
+    let mut ones_string: &str;
+    let mut number: String;
+
+    for num in 1..1001 {
+        
+        if num == 1000 {
+
+            print!("onethousand");
+            current_count = 11;
+
+        } else {
+
+            hundreds = num / 100;
+            tens = (num - (hundreds * 100)) / 10;
+            ones = num % 10;
+
+            //println!("{hundreds} hundreds, {tens} tens, and {ones} ones");
+
+            hundreds_string = hundreds_map.get(hundreds).expect("string");
+            if tens == 1 {
+                tens_string = teens_map.get(ones).expect("string");
+                number = hundreds_string.to_owned() + tens_string;
+            } else {
+                tens_string = tens_map.get(tens).expect("string");
+                ones_string = digit_map.get(ones).expect("string");
+                number = hundreds_string.to_owned() + tens_string + ones_string;
+            }
+            print!("{number}");
+            
+
+            current_count = number.len() as i64;
+
+            if num % 100 == 0 {
+                current_count -= 3;
+            }
+        }
+
+        total_count += current_count;
+        println!(" current: {current_count} total: {total_count}");
+    }
+
+    return total_count;
 }
