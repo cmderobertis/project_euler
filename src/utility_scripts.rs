@@ -11,8 +11,42 @@ pub fn is_prime(num: i64) -> bool {
     return true;
 }
 
-pub fn multiply_array(vector:Vec<i64>) -> i64 {
+pub fn multiply_array(vector: Vec<i64>) -> i64 {
     return vector.iter().product();
+}
+
+pub fn large_sum(vectors: [Vec<i64>;2]) -> Vec<i64> {
+    let mut answer: Vec<i64> = vec![];
+    let mut column_sum: i64 = 0;
+    let mut carry_the: i64;
+    let mut row: usize;
+    let mut column: usize;
+    let mut digit: i64;
+    let rows: usize = vectors.len();
+    let columns: usize = vectors[0].len();
+
+    for i in 0..columns {
+        column = columns - (i + 1);
+
+        for j in 0..rows {
+            row = j;
+            digit = vectors[row][column];
+            
+            column_sum += digit;
+        }
+
+        digit = column_sum % 10;
+        carry_the = (column_sum - digit) / 10;
+        answer.insert(0, digit);
+        //println!("digit: {digit}| column_sum: {column_sum} carry_the: {carry_the}");
+        column_sum = carry_the;
+
+        if i == columns - 1 {
+            answer.insert(0, carry_the);
+        }
+    }
+
+    return answer;
 }
 
 // pub fn sum_array(vector:Vec<i64>) -> i64 {

@@ -1,13 +1,13 @@
 use std::{collections::HashMap, time::{Duration, Instant}};
-use utility_scripts::{is_prime, count_factors};
+use utility_scripts::{count_factors, is_prime, large_sum};
 mod utility_scripts;
 
 // configure current problem
-pub const PROBLEM_COUNT: usize = 16;
+pub const PROBLEM_COUNT: usize = 17;
 
 // all problems
 const PROBLEMS: [fn() -> i64; PROBLEM_COUNT] =
-    [pe1, pe2, pe3, pe4, pe5, pe6, pe7, pe8, pe9, pe10, pe11, pe12, pe13, pe14, pe15, pe17];
+    [pe1, pe2, pe3, pe4, pe5, pe6, pe7, pe8, pe9, pe10, pe11, pe12, pe13, pe14, pe15, pe16, pe17];
 
 pub fn run_current() {
     run(&PROBLEMS[PROBLEMS.len() - 1]);
@@ -781,8 +781,23 @@ pub fn pe15() -> i64 {
 }
 
 // What is the sum of the digits of the number 2^1000?
-//pub fn pe16() -> i64 {
-//}
+pub fn pe16() -> i64 {
+    let mut sum: i64 = 0;
+    let mut answer: Vec<i64> = vec![];
+
+    answer.insert(0, 1);
+
+    for _i in 1..1001 {
+        answer = large_sum([answer.clone(),answer]).clone();
+    };
+    
+    for num in answer {
+        println!("{num}");
+        sum += num;
+    }
+
+    return sum;
+}
 
 //If all the numbers from 1 to 1000 inclusive were written out in words, how many letters would be used?
 pub fn pe17() -> i64 {
