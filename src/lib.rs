@@ -362,7 +362,6 @@ pub fn pe11() -> i64 {
     println!("{smallest_allowable_num}");
     for row in 0..20 {
         for column in 0..20 {
-            
             //NORTH
             if row >= 3 {
                 arr = [
@@ -409,10 +408,10 @@ pub fn pe11() -> i64 {
                     GRID[row][column + 2],
                     GRID[row][column + 3],
                 ];
-    
+
                 if check_arr(arr, smallest_allowable_num) {
                     product = utility_scripts::multiply_array(Vec::<i64>::from(arr));
-    
+
                     if product > max_product {
                         max_product = product;
                         smallest_allowable_num = max_product / 99 / 99 / 99 + 1;
@@ -428,17 +427,17 @@ pub fn pe11() -> i64 {
                     GRID[row + 2][column + 2],
                     GRID[row + 3][column + 3],
                 ];
-    
+
                 if check_arr(arr, smallest_allowable_num) {
                     product = utility_scripts::multiply_array(Vec::<i64>::from(arr));
-    
+
                     if product > max_product {
                         max_product = product;
                         smallest_allowable_num = max_product / 99 / 99 / 99 + 1;
                     }
                 }
             }
-            
+
             //SOUTH
             if row < 17 {
                 arr = [
@@ -476,7 +475,6 @@ pub fn pe11() -> i64 {
                     }
                 }
             }
-            
 
             //WEST
             if column >= 3 {
@@ -532,7 +530,7 @@ pub fn pe12() -> i64 {
 
     loop {
         triangle_number += i;
-        
+
         if is_prime(triangle_number) {
             i += 1;
             continue;
@@ -541,7 +539,7 @@ pub fn pe12() -> i64 {
         //factors = factorize(triangle_number);
         factor_count = count_factors(triangle_number);
         //factor_count2 = factors.len() as i64;
-        
+
         // if factor_count != factor_count2 {
         //     println!("Error: contradicting returns from factor functions!");
         //     println!("count_factors(): {factor_count}, factorize().len(): {factor_count2}");
