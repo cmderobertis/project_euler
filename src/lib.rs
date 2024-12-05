@@ -1,13 +1,13 @@
-use std::{collections::HashMap, time::{Duration, Instant}};
+use std::{array, cmp::{self, max}, collections::HashMap, time::{Duration, Instant}, vec};
 use utility_scripts::{count_factors, is_prime, large_sum};
 mod utility_scripts;
 
 // configure current problem
-pub const PROBLEM_COUNT: usize = 17;
+pub const PROBLEM_COUNT: usize = 18;
 
 // all problems
 const PROBLEMS: [fn() -> i64; PROBLEM_COUNT] =
-    [pe1, pe2, pe3, pe4, pe5, pe6, pe7, pe8, pe9, pe10, pe11, pe12, pe13, pe14, pe15, pe16, pe17];
+    [pe1, pe2, pe3, pe4, pe5, pe6, pe7, pe8, pe9, pe10, pe11, pe12, pe13, pe14, pe15, pe16, pe17, pe18];
 
 pub fn run_current() {
     run(&PROBLEMS[PROBLEMS.len() - 1]);
@@ -858,8 +858,8 @@ pub fn pe17() -> i64 {
 
 // Find the maximum total from top to bottom of the triangle below (one num per row, adjacent to num picked in row above):
 pub fn pe18() -> i64 {
-    let mut max_total: i64 = 0;
-    let mut triangle: [Vec<i64>;15] = [
+    const ROWS: usize = 15;
+    let mut triangle: [Vec<i64>;ROWS] = [
         vec![75],
         vec![95,64],
         vec![17,47,82],
@@ -876,10 +876,14 @@ pub fn pe18() -> i64 {
         vec![63,66,04,68,89,53,67,30,73,16,69,87,40,31],
         vec![04,62,98,27,23,09,70,98,73,93,38,53,60,04,23]
     ];
-    
-    for i in (0..15).rev() {
 
+    for i in (0..ROWS - 1).rev() {
+        for j in 0..triangle[i].len() {
+            triangle[i][j] += max(triangle[i + 1][j],triangle[i + 1][j + 1]);
+        }
     }
 
-    return 1;
+    return triangle[0][0];
 }
+
+// How many Sundays fell on the first of the month during the twentieth century (1 Jan 1901 to 31 Dec 2000)?

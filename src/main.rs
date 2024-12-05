@@ -6,9 +6,9 @@ fn main() {
     //lib::run_all();
 
     //RUN CURRENT PROBLEM
-    //lib::run_current();
+    lib::run_current();
 
     //RUN SPECIFIC PROBLEM BY FUNCTION NAME
-    lib::run(&(lib::pe15 as fn() -> i64));
+    //lib::run(&(lib::pe15 as fn() -> i64));
 
 }
