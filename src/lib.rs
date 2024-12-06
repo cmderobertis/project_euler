@@ -3,11 +3,11 @@ use utility_scripts::{count_factors, is_prime, large_sum};
 mod utility_scripts;
 
 // configure current problem
-pub const PROBLEM_COUNT: usize = 18;
+pub const PROBLEM_COUNT: usize = 19;
 
 // all problems
 const PROBLEMS: [fn() -> i64; PROBLEM_COUNT] =
-    [pe1, pe2, pe3, pe4, pe5, pe6, pe7, pe8, pe9, pe10, pe11, pe12, pe13, pe14, pe15, pe16, pe17, pe18];
+    [pe1, pe2, pe3, pe4, pe5, pe6, pe7, pe8, pe9, pe10, pe11, pe12, pe13, pe14, pe15, pe16, pe17, pe18, pe19];
 
 pub fn run_current() {
     run(&PROBLEMS[PROBLEMS.len() - 1]);
@@ -887,3 +887,39 @@ pub fn pe18() -> i64 {
 }
 
 // How many Sundays fell on the first of the month during the twentieth century (1 Jan 1901 to 31 Dec 2000)?
+pub fn pe19() -> i64 {
+    let mut sunday_count: i64 = 0;
+    let mut months: [i64;12] = [31,28,31,30,31,30,31,31,30,31,30,31];
+    let mut remainder_of_week: i64 = 0;
+    let mut remainder_of_month: i64;
+
+    for year in 1901..2001 {
+        // A leap year occurs on any year evenly divisible by 4
+        if year % 4 == 0 {
+            months[1] = 29;
+        } else {
+            months[1] = 28;
+        }
+
+        for i in 0..months.len() {
+            if remainder_of_week == 0 {
+                sunday_count += 1;
+            } else {
+                remainder_of_month = months[i] - remainder_of_week;
+
+                loop {
+                    if remainder_of_month < 7 {
+                        break;
+                    } else {
+                        remainder_of_month -= 7;
+                    }
+                }
+
+                remainder_of_week = remainder_of_month;
+            }
+        }
+    }
+
+
+    return sunday_count;
+}
