@@ -1,4 +1,4 @@
-use std::{array, cmp::{self, max}, collections::HashMap, time::{Duration, Instant}, vec};
+use std::{array, cmp::{self, max}, collections::{HashMap, HashSet}, time::{Duration, Instant}, vec};
 use utility_scripts::{count_factors, is_prime, large_sum};
 mod utility_scripts;
 
@@ -889,37 +889,38 @@ pub fn pe18() -> i64 {
 // How many Sundays fell on the first of the month during the twentieth century (1 Jan 1901 to 31 Dec 2000)?
 pub fn pe19() -> i64 {
     let mut sunday_count: i64 = 0;
-    let mut months: [i64;12] = [31,28,31,30,31,30,31,31,30,31,30,31];
-    let mut remainder_of_week: i64 = 0;
-    let mut remainder_of_month: i64;
+    let mut months: HashSet<i64> = HashSet::new();
+    let mut leap_months: HashSet<i64> = HashSet::new();
+    let mut months_this_year: &HashSet<i64>;
+    let mut days_in_year: i64;
+    let mut day: i64 = 6;
+
+    months.extend([1,32,60,91,121,152,182,213,244,274,305,335]);
+    leap_months.extend([1,32,61,92,122,153,183,214,245,275,306,336]);
 
     for year in 1901..2001 {
         // A leap year occurs on any year evenly divisible by 4
         if year % 4 == 0 {
-            months[1] = 29;
+            months_this_year = &leap_months;
+            days_in_year = 366;
         } else {
-            months[1] = 28;
+            months_this_year = &months;
+            days_in_year = 365;
         }
 
-        for i in 0..months.len() {
-            if remainder_of_week == 0 {
-                sunday_count += 1;
+        loop {
+            if day >= days_in_year {
+                day -= days_in_year;
+                break;
             } else {
-                remainder_of_month = months[i] - remainder_of_week;
-
-                loop {
-                    if remainder_of_month < 7 {
-                        break;
-                    } else {
-                        remainder_of_month -= 7;
-                    }
+                if months_this_year.contains(&day) {
+                    sunday_count += 1;
                 }
 
-                remainder_of_week = remainder_of_month;
+                day += 7;
             }
         }
     }
-
 
     return sunday_count;
 }
