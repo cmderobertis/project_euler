@@ -49,9 +49,9 @@ pub fn large_sum(vectors: [Vec<i64>;2]) -> Vec<i64> {
     return answer;
 }
 
-// pub fn sum_array(vector:Vec<i64>) -> i64 {
-//     return vector.iter().sum();
-// }
+pub fn sum_array(vector:Vec<i64>) -> i64 {
+    return vector.iter().sum();
+}
 
 // pub fn factorize(num: i64) -> Vec<i64> {
 //     let mut vector: Vec<i64> = vec![];
