@@ -15,7 +15,7 @@ pub fn multiply_array(vector: Vec<i64>) -> i64 {
     return vector.iter().product();
 }
 
-pub fn large_sum(vectors: [Vec<i64>;2]) -> Vec<i64> {
+pub fn large_sum(vectors: Vec<&Vec<i64>>) -> Vec<i64> {
     let mut answer: Vec<i64> = vec![];
     let mut column_sum: i64 = 0;
     let mut carry_the: i64;
@@ -24,6 +24,8 @@ pub fn large_sum(vectors: [Vec<i64>;2]) -> Vec<i64> {
     let mut digit: i64;
     let rows: usize = vectors.len();
     let columns: usize = vectors[0].len();
+
+
 
     for i in 0..columns {
         column = columns - (i + 1);
@@ -42,11 +44,18 @@ pub fn large_sum(vectors: [Vec<i64>;2]) -> Vec<i64> {
         column_sum = carry_the;
 
         if i == columns - 1 {
-            answer.insert(0, carry_the);
+            if carry_the > 9 {
+                answer.extend([carry_the / 10, carry_the % 10]);
+            } else {
+                answer.insert(0, carry_the);
+            }
+            
         }
     }
 
-    return answer;
+    let first_non_zero: usize = answer.iter().position(|&x| x != 0).unwrap_or(answer.len());
+    answer.drain(0..first_non_zero);
+    answer
 }
 
 pub fn sum_array(vector:Vec<i64>) -> i64 {
