@@ -45,7 +45,8 @@ pub fn large_sum(vectors: Vec<&Vec<i64>>) -> Vec<i64> {
 
         if i == columns - 1 {
             if carry_the > 9 {
-                answer.extend([carry_the / 10, carry_the % 10]);
+                answer.insert(0, carry_the % 10);
+                answer.insert(0, carry_the / 10);
             } else {
                 answer.insert(0, carry_the);
             }

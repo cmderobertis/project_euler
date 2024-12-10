@@ -13,7 +13,7 @@ pub const PROBLEM_COUNT: usize = 20;
 // all problems
 const PROBLEMS: [fn() -> i64; PROBLEM_COUNT] = [
     pe1, pe2, pe3, pe4, pe5, pe6, pe7, pe8, pe9, pe10, pe11, pe12, pe13, pe14, pe15, pe16, pe17,
-    pe18, pe19, pe20,
+    pe18, pe19, pe20
 ];
 
 pub fn run_current() {
@@ -1250,7 +1250,7 @@ pub fn pe19() -> i64 {
     return sunday_count;
 }
 
-//
+// Find the sum of the digits in the number 100!.
 pub fn pe20() -> i64 {
     let mut sum_vector: Vec<i64> = vec![1];
 
@@ -1262,7 +1262,5 @@ pub fn pe20() -> i64 {
         println!(); // Print a newline at the end
     }
 
-    
-
-    return sum_vector.len() as i64;
+    return sum_array(sum_vector);
 }
