@@ -4,16 +4,16 @@ use std::{
     time::{Duration, Instant},
     vec,
 };
-use utility_scripts::{count_factors, is_prime, large_sum, sum_array};
+use utility_scripts::{count_divisors, is_prime, large_sum, sum_array, sum_divisors};
 mod utility_scripts;
 
 // configure current problem
-pub const PROBLEM_COUNT: usize = 20;
+pub const PROBLEM_COUNT: usize = 21;
 
 // all problems
 const PROBLEMS: [fn() -> i64; PROBLEM_COUNT] = [
     pe1, pe2, pe3, pe4, pe5, pe6, pe7, pe8, pe9, pe10, pe11, pe12, pe13, pe14, pe15, pe16, pe17,
-    pe18, pe19, pe20
+    pe18, pe19, pe20, pe21
 ];
 
 pub fn run_current() {
@@ -541,7 +541,7 @@ pub fn pe12() -> i64 {
             continue;
         }
 
-        factor_count = count_factors(triangle_number);
+        factor_count = count_divisors(triangle_number);
 
         if factor_count > max_factor_count {
             max_factor_count = factor_count;
@@ -1263,4 +1263,11 @@ pub fn pe20() -> i64 {
     }
 
     return sum_array(sum_vector);
+}
+
+// Evaluate the sum of all the amicable numbers under 10,000.
+pub fn pe21() -> i64 {
+    let sum = sum_divisors(6);
+
+    return sum;
 }

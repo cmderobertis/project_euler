@@ -89,7 +89,7 @@ pub fn sum_array(vector:Vec<i64>) -> i64 {
 //     return vector;
 // }
 
-pub fn count_factors(num: i64) -> i64 {
+pub fn count_divisors(num: i64) -> i64 {
     let mut count: i64 = 0;
 
     for i in 1..(num as f64).sqrt() as i64 + 1 {
@@ -99,4 +99,19 @@ pub fn count_factors(num: i64) -> i64 {
     }
 
     return count;
+}
+
+pub fn sum_divisors(num: i64) -> i64 {
+    let mut sum: i64 = 0;
+
+    for i in 1..(num as f64).sqrt() as i64 + 1 {
+        if num % i == 0 {
+            sum += i;
+            if i > 1 && num / i != i {
+                sum += num / i;
+            }
+        }
+    }
+
+    return sum;
 }
