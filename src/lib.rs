@@ -1267,7 +1267,17 @@ pub fn pe20() -> i64 {
 
 // Evaluate the sum of all the amicable numbers under 10,000.
 pub fn pe21() -> i64 {
-    let sum = sum_divisors(6);
+    let amicable_map: HashMap<i64,i64> = HashMap::new();
+    let mut sum = sum_divisors(6);
+
+    for num in 5..10001 {
+        sum = sum_divisors(num);
+        if amicable_map.contains_key(&num) {
+            if &sum_divisors(num) == amicable_map.get(&num).unwrap() {
+
+            }
+        }
+    }
 
     return sum;
 }
