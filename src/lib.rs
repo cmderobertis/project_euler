@@ -3,17 +3,18 @@ use std::{
     collections::{HashMap, HashSet},
     time::{Duration, Instant},
     vec,
+    fs
 };
 use utility_scripts::{count_divisors, is_prime, large_sum, sum_array, sum_divisors};
 mod utility_scripts;
 
 // configure current problem
-pub const PROBLEM_COUNT: usize = 21;
+pub const PROBLEM_COUNT: usize = 22;
 
 // all problems
 const PROBLEMS: [fn() -> i64; PROBLEM_COUNT] = [
     pe1, pe2, pe3, pe4, pe5, pe6, pe7, pe8, pe9, pe10, pe11, pe12, pe13, pe14, pe15, pe16, pe17,
-    pe18, pe19, pe20, pe21
+    pe18, pe19, pe20, pe21, pe22
 ];
 
 pub fn run_current() {
@@ -1289,6 +1290,14 @@ pub fn pe21() -> i64 {
             amicable_map.insert(num, this_sum);
         }
     }
+
+    return sum;
+}
+
+// What is the total of all the name scores in the file?
+pub fn pe22() -> i64 {
+    let mut sum: i64 = 0;
+    let mut vector: String = fs::read_to_string("src/0022_names.txt").expect("");
 
     return sum;
 }
