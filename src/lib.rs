@@ -1267,15 +1267,26 @@ pub fn pe20() -> i64 {
 
 // Evaluate the sum of all the amicable numbers under 10,000.
 pub fn pe21() -> i64 {
-    let amicable_map: HashMap<i64,i64> = HashMap::new();
-    let mut sum = sum_divisors(6);
+    let mut amicable_map: HashMap<i64,i64> = HashMap::new();
+    let mut this_sum: i64 ;
+    let mut that_sum: &i64;
+    let mut sum: i64 = 0;
 
-    for num in 5..10001 {
-        sum = sum_divisors(num);
-        if amicable_map.contains_key(&num) {
-            if &sum_divisors(num) == amicable_map.get(&num).unwrap() {
+    for num in 1..10001 {
+        //sum the proper divisors of num
+        this_sum = sum_divisors(num);
 
+        //if this_sum is already stored
+        if amicable_map.contains_key(&this_sum) {
+
+            //does num == that sum?
+            that_sum = amicable_map.get(&this_sum).unwrap();
+            if &num == that_sum {
+                sum += num + this_sum;
+                println!("amicable pair found -> ({this_sum:0>5},{that_sum:0>5}) | total {sum:0>5}");
             }
+        } else {
+            amicable_map.insert(num, this_sum);
         }
     }
 
