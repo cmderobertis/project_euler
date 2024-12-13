@@ -1,11 +1,7 @@
 use std::{
-    cmp::max,
-    collections::{HashMap, HashSet},
-    time::{Duration, Instant},
-    vec,
-    fs
+    backtrace, cmp::max, collections::{HashMap, HashSet}, fs, time::{Duration, Instant}, vec
 };
-use utility_scripts::{count_divisors, is_prime, large_sum, sum_array, sum_divisors};
+use utility_scripts::{count_divisors, is_prime, large_sum, letter_to_number, sum_array, sum_divisors};
 mod utility_scripts;
 
 // configure current problem
@@ -1297,7 +1293,20 @@ pub fn pe21() -> i64 {
 // What is the total of all the name scores in the file?
 pub fn pe22() -> i64 {
     let mut sum: i64 = 0;
-    let mut vector: String = fs::read_to_string("src/0022_names.txt").expect("");
+    let names_string = fs::read_to_string("src/0022_names.txt").expect("");
+    let mut names: Vec<String> = names_string[1..names_string.len() - 1]
+    .split("\",\"")
+    .map(|s| s.to_string())
+    .collect();
+
+    //sort the string of names
+    names.sort_by(|a,b| a.cmp(&b));
+    println!("{:?}",names);
+    println!("{}", names[0]);
+    for i in 0..names[0].len() {
+        println!("{} = {}", names[0].chars().nth(i).expect(""), letter_to_number(names[0].chars().nth(i).expect("")));
+
+    }
 
     return sum;
 }

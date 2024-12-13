@@ -115,3 +115,7 @@ pub fn sum_divisors(num: i64) -> i64 {
 
     return sum;
 }
+
+pub fn letter_to_number(c: char) -> i64 {
+    (c as i64) - ('A' as i64) + 1
+}
