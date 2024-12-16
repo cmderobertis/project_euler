@@ -5,12 +5,12 @@ use utility_scripts::{count_divisors, is_prime, large_sum, letter_to_number, sum
 mod utility_scripts;
 
 // configure current problem
-pub const PROBLEM_COUNT: usize = 22;
+pub const PROBLEM_COUNT: usize = 23;
 
 // all problems
 const PROBLEMS: [fn() -> i64; PROBLEM_COUNT] = [
     pe1, pe2, pe3, pe4, pe5, pe6, pe7, pe8, pe9, pe10, pe11, pe12, pe13, pe14, pe15, pe16, pe17,
-    pe18, pe19, pe20, pe21, pe22
+    pe18, pe19, pe20, pe21, pe22, pe23
 ];
 
 pub fn run_current() {
@@ -1290,23 +1290,36 @@ pub fn pe21() -> i64 {
     return sum;
 }
 
-// What is the total of all the name scores in the file?
+// What is the total of all the name scores in the file (0022_names.txt)?
 pub fn pe22() -> i64 {
     let mut sum: i64 = 0;
+    let mut name_sum: i64;
     let names_string = fs::read_to_string("src/0022_names.txt").expect("");
     let mut names: Vec<String> = names_string[1..names_string.len() - 1]
     .split("\",\"")
     .map(|s| s.to_string())
     .collect();
 
-    //sort the string of names
+    // sort the string of names
     names.sort_by(|a,b| a.cmp(&b));
-    println!("{:?}",names);
-    println!("{}", names[0]);
-    for i in 0..names[0].len() {
-        println!("{} = {}", names[0].chars().nth(i).expect(""), letter_to_number(names[0].chars().nth(i).expect("")));
 
+    // loop through each name
+    for i in 0..names.len() {
+        name_sum = 0;
+
+        // loop through each letter, summing the letter values
+        for j in 0..names[i].len() {
+            name_sum += letter_to_number(names[i].chars().nth(j).expect(""));
+        }
+        
+        // add the name_sum to sum, first multiplying by position in list
+        sum += name_sum * (i as i64 + 1);
     }
-
+    
     return sum;
+}
+
+// Find the sum of all the positive integers which cannot be written as the sum of two abundant numbers.
+pub fn pe23() -> i64 {
+    return 1;
 }
