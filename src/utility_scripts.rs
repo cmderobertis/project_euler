@@ -116,6 +116,10 @@ pub fn sum_divisors(num: i64) -> i64 {
     return sum;
 }
 
+pub fn is_abundant(num: i64) -> bool {
+    return sum_divisors(num) > num;
+}
+
 pub fn letter_to_number(c: char) -> i64 {
     (c as i64) - ('A' as i64) + 1
 }

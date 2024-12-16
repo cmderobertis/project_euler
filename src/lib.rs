@@ -1,7 +1,7 @@
 use std::{
     backtrace, cmp::max, collections::{HashMap, HashSet}, fs, time::{Duration, Instant}, vec
 };
-use utility_scripts::{count_divisors, is_prime, large_sum, letter_to_number, sum_array, sum_divisors};
+use utility_scripts::{count_divisors, is_abundant, is_prime, large_sum, letter_to_number, sum_array, sum_divisors};
 mod utility_scripts;
 
 // configure current problem
@@ -1321,5 +1321,20 @@ pub fn pe22() -> i64 {
 
 // Find the sum of all the positive integers which cannot be written as the sum of two abundant numbers.
 pub fn pe23() -> i64 {
-    return 1;
+    let mut sum: i64 = 0;
+    let mut is_not_abundant_sum: bool = true;
+    let mut abundant_map: HashMap<i64,bool> = Default::default();
+
+    for i in 1..28123 {
+        for j in 1..abundant_map.len() as i64 {
+            if *abundant_map.get(&j).expect("") == true  {
+                
+            }
+        }
+
+        abundant_map.insert(i, is_abundant(i));
+    }
+
+    // should be less than 395,437,503
+    return sum;
 }
