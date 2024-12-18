@@ -1322,17 +1322,32 @@ pub fn pe22() -> i64 {
 // Find the sum of all the positive integers which cannot be written as the sum of two abundant numbers.
 pub fn pe23() -> i64 {
     let mut sum: i64 = 0;
-    let mut is_not_abundant_sum: bool = true;
-    let mut abundant_map: HashMap<i64,bool> = Default::default();
+    let mut is_abundant_sum: bool;
+    let mut abundant_set: HashSet<i64> = Default::default();
 
     for i in 1..28123 {
-        for j in 1..abundant_map.len() as i64 {
-            if *abundant_map.get(&j).expect("") == true  {
-                
+        is_abundant_sum = false;
+
+        for j in 1..i as i64 {
+            if abundant_set.contains(&j)  {
+                if abundant_set.contains(&(i - j)) {
+                    is_abundant_sum = true;
+                    break;
+                }
             }
         }
 
-        abundant_map.insert(i, is_abundant(i));
+        if !is_abundant_sum {
+            sum += i;
+            //println!("{sum - i} + {i} = {sum}");
+        }
+
+        if is_abundant(i) {
+            abundant_set.insert(i);
+        }
+        
+
+        //println!("{:?}", abundant_set);
     }
 
     // should be less than 395,437,503
