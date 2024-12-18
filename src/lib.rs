@@ -1,16 +1,16 @@
 use std::{
-    backtrace, cmp::max, collections::{HashMap, HashSet}, fs, time::{Duration, Instant}, vec
+    cmp::max, collections::{HashMap, HashSet}, fs, time::{Duration, Instant}
 };
 use utility_scripts::{count_divisors, is_abundant, is_prime, large_sum, letter_to_number, sum_array, sum_divisors};
 mod utility_scripts;
 
 // configure current problem
-pub const PROBLEM_COUNT: usize = 23;
+pub const PROBLEM_COUNT: usize = 24;
 
 // all problems
 const PROBLEMS: [fn() -> i64; PROBLEM_COUNT] = [
     pe1, pe2, pe3, pe4, pe5, pe6, pe7, pe8, pe9, pe10, pe11, pe12, pe13, pe14, pe15, pe16, pe17,
-    pe18, pe19, pe20, pe21, pe22, pe23
+    pe18, pe19, pe20, pe21, pe22, pe23, pe24
 ];
 
 pub fn run_current() {
@@ -1352,4 +1352,9 @@ pub fn pe23() -> i64 {
 
     // should be less than 395,437,503
     return sum;
+}
+
+//
+pub fn pe24() -> i64 {
+    return 1;
 }
