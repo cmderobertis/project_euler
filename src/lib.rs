@@ -1354,7 +1354,14 @@ pub fn pe23() -> i64 {
     return sum;
 }
 
-//
+// What is the millionth lexicographic permutation of the digits 0, 1, 2, 3, 4, 5, 6, 7, 8 and 9?
 pub fn pe24() -> i64 {
+    //012345678.9
+    //01234567.98
+    //0123456879
+    //0123456897
+    //0123456978
+    //0123456.987
+
     return 1;
 }
