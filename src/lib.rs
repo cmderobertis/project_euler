@@ -1356,12 +1356,28 @@ pub fn pe23() -> i64 {
 
 // What is the millionth lexicographic permutation of the digits 0, 1, 2, 3, 4, 5, 6, 7, 8 and 9?
 pub fn pe24() -> i64 {
-    //012345678.9
-    //01234567.98
-    //0123456879
-    //0123456897
-    //0123456978
-    //0123456.987
+    let base_permutation: Vec<i64> = vec![0,1,2,3,4,5,6,7,8,9];
+    let mut permutation: Vec<i64> = base_permutation.clone();
+    let mut p_index: i64;
+    let mut held_digit: i64;
+
+    //012345678(9*) last() before [held_digit] in 0-9
+    //01234567(9(8*)) last() before [held_digit] in 0-9
+    //0123456(87(9*))
+    //0123456(8(97*))
+    //0123456(978)
+    //0123456(987*) last() before [held_digit] in 0-9
+    //012345(7689)
+    //012345(7698)
+    //012345(7869)
+
+
+    //if slice of digits after held_digit are ordered big to small *
+        //note the last digit in slice, place before held_digit in base to create new permutation
+        //expand the slice by 1
+        //held_digit -= 1
+
+    //recursive calls return p_index?
 
     return 1;
 }
