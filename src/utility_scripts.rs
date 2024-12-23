@@ -120,6 +120,20 @@ pub fn is_abundant(num: i64) -> bool {
     return sum_divisors(num) > num;
 }
 
+pub fn is_in_lexicographic_order(vector: Vec<i64>) -> bool {
+    let mut last_num = vector[0];
+    
+    for num in &vector[1..] {
+        if *num < last_num {
+            return false;
+        } else {
+            last_num = *num;
+        }
+    }
+
+    return true;
+}
+
 pub fn letter_to_number(c: char) -> i64 {
     (c as i64) - ('A' as i64) + 1
 }

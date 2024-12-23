@@ -1,7 +1,8 @@
+use core::slice;
 use std::{
     cmp::max, collections::{HashMap, HashSet}, fs, time::{Duration, Instant}
 };
-use utility_scripts::{count_divisors, is_abundant, is_prime, large_sum, letter_to_number, sum_array, sum_divisors};
+use utility_scripts::{count_divisors, is_abundant, is_in_lexicographic_order, is_prime, large_sum, letter_to_number, sum_array, sum_divisors};
 mod utility_scripts;
 
 // configure current problem
@@ -1360,6 +1361,7 @@ pub fn pe24() -> i64 {
     let mut permutation: Vec<i64> = base_permutation.clone();
     let mut p_index: i64;
     let mut held_digit: i64;
+    let mut millionth_permutation: i64;
 
     //012345678(9*) last() before [held_digit] in 0-9
     //01234567(9(8*)) last() before [held_digit] in 0-9
@@ -1371,13 +1373,30 @@ pub fn pe24() -> i64 {
     //012345(7698)
     //012345(7869)
 
+    // fn generate_permutations(p: Vec<i64>, index: i64) {
+    //     if p.len() > 1 {
+    //         generate_permutations(p[1..p.len()].to_vec(), index);
+            
+
+    //     } else {
+    //         if p[p.len() - 1] {
+
+    //         }
+    //         index += 1;
+    //     }
+        
+    // }
 
     //if slice of digits after held_digit are ordered big to small *
         //note the last digit in slice, place before held_digit in base to create new permutation
         //expand the slice by 1
         //held_digit -= 1
 
-    //recursive calls return p_index?
+    //generate_permutations(base_permutation, 1);
 
-    return 1;
+    println!("{}", is_in_lexicographic_order(vec![23,2,3,4]));
+
+    millionth_permutation = 9876543210;
+
+    return millionth_permutation;
 }
